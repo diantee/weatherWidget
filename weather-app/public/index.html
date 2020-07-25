@@ -9,37 +9,35 @@
     <title>Weather App</title>
 </head>
 <body>
-    <div class="containter">
+    <div class="container">
         <div class="header">
-            <div class="icon-container">
-                <canvas id="icon" width="100" height="100"></canvas>
-            </div>
+            <div id="weather-icon"></div>
         </div>
         <div class="content">
             <div class="general-information">
-                <div class="status">Enter a Location</div>
-                <div class="location">To Find the Weather</div>
+                <div class="status" data-status>Enter a Location</div>
+                <div class="location" data-location>To Find the Weather</div>
             </div>
             <div class="detail-section">
                 <div class="detail">
                     <div class="title">Temperature</div>
-                    <div class="value">- -</div>
+                    <div class="value" data-temperature>- -</div>
                 </div>
                 <div class="detail">
                     <div class="title">Humidity</div>
-                    <div class="value">- -</div>
+                    <div class="value" data-humidity>- -</div>
                 </div>
                 <div class="detail">
                     <div class="title">UV Index</div>
-                    <div class="value">- -</div>
+                    <div class="value" data-uv>- -</div>
                 </div>
                 <div class="detail">
                     <div class="title">Wind Speed</div>
-                    <div class="value">- -</div>
+                    <div class="value" data-wind>- -</div>
                 </div>
             </div>
             <div class="city-search-container">
-                <input type="text" class="city-search" placeholder="Enter Location">
+                <input type="text" class="city-search" data-city-search="Enter Location">
             </div>
         </div>
     </div>
