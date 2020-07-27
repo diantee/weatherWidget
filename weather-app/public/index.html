@@ -11,7 +11,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <div id="weather-icon"></div>
+            <div class="icon-container">
+              <div id="weather-icon"></div>
+            </div>
         </div>
         <div class="content">
             <div class="general-information">
@@ -22,12 +24,13 @@
                 <div class="detail">
                     <div class="title">Temperature</div>
                     <div class="value" data-temperature>- -</div>
+                    <input type="button" class="toggle" id="tempButton" value="Convert to °C" onclick="toggleTemp();">
                 </div>
-                <div class="detail">
+                <div class="detail borderedL">
                     <div class="title">Humidity</div>
                     <div class="value" data-humidity>- -</div>
                 </div>
-                <div class="detail">
+                <div class="detail borderedR">
                     <div class="title">UV Index</div>
                     <div class="value" data-uv>- -</div>
                 </div>
@@ -37,7 +40,7 @@
                 </div>
             </div>
             <div class="city-search-container">
-                <input type="text" class="city-search" data-city-search="Enter Location">
+                <input type="text" class="city-search" data-city-search placeholder="Enter Location">
             </div>
         </div>
     </div>

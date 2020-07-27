@@ -23,21 +23,39 @@ searchBox.addListener('places_changed', () => {
 
 const icon = document.getElementById('weather-icon')
 const locationElement = document.querySelector('[data-location]')
-const statusElement = document.querySelector('[data-status]')
+const statusElement  = document.querySelector('[data-status]')
 const temperatureElement = document.querySelector('[data-temperature]')
 const humidityElement = document.querySelector('[data-humidity]')
 const uvElement = document.querySelector('[data-uv]')
 const windElement = document.querySelector('[data-wind]')
+var kelvinTemp = 0
+
+
 
 function setWeatherData(data, place) {
+  kelvinTemp = data.current.temp
   locationElement.textContent = place
-  statusElement.textContent = data.current.weather.main
-  temperatureElement.textContent = data.current.temp
-  humidityElement.textContent = data.current.humidity
-  uvElement.textContent = data.current.uvi
-  windElement.textContent = data.current.wind_speed
-  //const iconID = data['current']['weather']['0']['icon']
-  //icon.innerHTML = "<img src=\"http://openweathermap.org/img/wn/" + iconID + "@2x.png\">"
+  statusElement.textContent = data['current']['weather']['0']['description']
+  temperatureElement.textContent = Math.round((((kelvinTemp - 273.15) * 9) / 5) + 32) + "°F"
+  humidityElement.textContent = Math.round(data.current.humidity) + " %"
+  uvElement.textContent = Math.round(data.current.uvi)
+  windElement.textContent = Math.round(data.current.wind_speed) + " mph"
   icon.innerHTML = "<img src=\"http://openweathermap.org/img/wn/" + data['current']['weather']['0']['icon'] + "@2x.png\">"
   
 }
+
+function toggleTemp () {
+  var temp = kelvinTemp
+  if (document.getElementById("tempButton").value=="Convert to °C") {
+    temp = Math.round(temp - 273.15) + "°F"
+    console.log(temp)
+    document.getElementById("tempButton").value="Convert to °F"
+    temperatureElement.textContent = temp
+    
+  } else if (document.getElementById("tempButton").value=="Convert to °F") {
+    temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°C"
+    console.log(temp)
+    document.getElementById("tempButton").value="Convert to °C"
+    temperatureElement.textContent = temp
+  }
+  }
