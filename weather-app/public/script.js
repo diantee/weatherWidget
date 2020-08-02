@@ -28,15 +28,14 @@ const temperatureElement = document.querySelector('[data-temperature]')
 const humidityElement = document.querySelector('[data-humidity]')
 const uvElement = document.querySelector('[data-uv]')
 const windElement = document.querySelector('[data-wind]')
-var kelvinTemp = 0
-
-
+var kelvinTemp
 
 function setWeatherData(data, place) {
   kelvinTemp = data.current.temp
   locationElement.textContent = place
   statusElement.textContent = data['current']['weather']['0']['description']
   temperatureElement.textContent = Math.round((((kelvinTemp - 273.15) * 9) / 5) + 32) + "°F"
+  document.getElementById("tempButton").value="Convert to °C"
   humidityElement.textContent = Math.round(data.current.humidity) + " %"
   uvElement.textContent = Math.round(data.current.uvi)
   windElement.textContent = Math.round(data.current.wind_speed) + " mph"
@@ -46,14 +45,18 @@ function setWeatherData(data, place) {
 
 function toggleTemp () {
   var temp = kelvinTemp
-  if (document.getElementById("tempButton").value=="Convert to °C") {
-    temp = Math.round(temp - 273.15) + "°F"
+
+  if (document.querySelector('[data-temperature]').innerHTML=='- -') {
+    void(0)
+    }
+  else if (document.getElementById("tempButton").value=="Convert to °C") {
+    temp = Math.round(temp - 273.15) + "°C"
     console.log(temp)
     document.getElementById("tempButton").value="Convert to °F"
     temperatureElement.textContent = temp
     
   } else if (document.getElementById("tempButton").value=="Convert to °F") {
-    temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°C"
+    temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°F"
     console.log(temp)
     document.getElementById("tempButton").value="Convert to °C"
     temperatureElement.textContent = temp

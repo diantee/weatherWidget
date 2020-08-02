@@ -15,9 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
       axios({
         url: url,
         responseType: 'json'
-      }).then(data => res.json(data.data)).catch(error => { console.error(error)})
-      //console.log(req.body)
-      
+      }).then(data => res.json(data.data)).catch(error => { console.error(error)})      
   })
   
   app.listen(3000, () => {

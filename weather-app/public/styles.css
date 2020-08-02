@@ -22,8 +22,8 @@ body {
 }
 
 .content {
-    padding: 40px;
-    margin-top: 50px;
+    padding: 20px;
+    margin-top: 20px;
 }
 
 .header {
@@ -68,7 +68,7 @@ body {
 .detail-section {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .detail {
@@ -77,7 +77,7 @@ body {
     align-items: center;
     flex-basis: 0;
     flex-grow: 1;
-    padding: 20px;
+    padding: 10px;
 }
 
 .detail.borderedL {
@@ -91,7 +91,6 @@ body {
 
 .detail .title {
     font-size: 2rem;
-    flex-grow: 1;
     font-weight: bold;
     color: #777;
 }
@@ -100,6 +99,7 @@ body {
     font-size: 2rem;
     margin-top: 20px;
 }
+
 
 .detail .toggle {
     margin-top: 5px;
@@ -112,7 +112,7 @@ body {
 
 .city-search {
     margin-top: 40px;
-    font-size: 2rem;
+    font-size: 1rem;
     outline: none;
     border: 1px dolis #777;
     padding: 10px 15px;
@@ -120,8 +120,7 @@ body {
 }
 
 .pac-item {
-    font-size: 2rem;
-    padding: 10px 10px;
+    font-size: 1rem;
 }
 
 .pac-icon {
@@ -129,6 +128,6 @@ body {
 }
 
 .pac-item-query {
-    font-size: 2rem;
+    font-size: 1rem;
     padding-right: 14px;
 }
