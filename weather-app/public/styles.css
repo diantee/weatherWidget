@@ -105,6 +105,19 @@ body {
     margin-top: 5px;
 }
 
+.wrapper{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.forecast{
+    vertical-align: middle;
+    border-style: none;
+    height: 200px;
+    max-width: 1000px;
+}
+
 .city-search-container {
     display: flex;
     justify-content: center;

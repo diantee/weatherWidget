@@ -29,8 +29,10 @@ const humidityElement = document.querySelector('[data-humidity]')
 const uvElement = document.querySelector('[data-uv]')
 const windElement = document.querySelector('[data-wind]')
 var kelvinTemp
+var jsonData
 
 function setWeatherData(data, place) {
+  jsonData = data;
   kelvinTemp = data.current.temp
   locationElement.textContent = place
   statusElement.textContent = data['current']['weather']['0']['description']
@@ -40,7 +42,7 @@ function setWeatherData(data, place) {
   uvElement.textContent = Math.round(data.current.uvi)
   windElement.textContent = Math.round(data.current.wind_speed) + " mph"
   icon.innerHTML = "<img src=\"http://openweathermap.org/img/wn/" + data['current']['weather']['0']['icon'] + "@2x.png\">"
-  
+  createChart();
 }
 
 function toggleTemp () {
@@ -51,13 +53,15 @@ function toggleTemp () {
     }
   else if (document.getElementById("tempButton").value=="Convert to °C") {
     temp = Math.round(temp - 273.15) + "°C"
-    console.log(temp)
+    setyAxesLabel("C")
+    setDailyTemp("C")
     document.getElementById("tempButton").value="Convert to °F"
     temperatureElement.textContent = temp
     
   } else if (document.getElementById("tempButton").value=="Convert to °F") {
     temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°F"
-    console.log(temp)
+    setyAxesLabel("F")
+    setDailyTemp("F")
     document.getElementById("tempButton").value="Convert to °C"
     temperatureElement.textContent = temp
   }

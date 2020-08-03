@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet">
     <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARyjI2qTVNT4QOM9Tp8yLS2uMbp-SPlR8&libraries=places"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script defer src="script.js"></script>
+    <script defer src="charts.js"></script>
     <title>Weather App</title>
 </head>
 <body>
@@ -39,10 +41,17 @@
                     <div class="value" data-wind>- -</div>
                 </div>
             </div>
+
+            <div class="wrapper">
+                <canvas class="forecast" id="line-chart"></canvas>
+            </div>
             <div class="city-search-container">
                 <input type="text" class="city-search" data-city-search placeholder="Enter Location">
             </div>
         </div>
     </div>
+
+    
+
 </body>
 </html>
