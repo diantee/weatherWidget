@@ -54,15 +54,27 @@ function toggleTemp () {
   else if (document.getElementById("tempButton").value=="Convert to °C") {
     temp = Math.round(temp - 273.15) + "°C"
     setyAxesLabel("C")
-    setDailyTemp("C")
+    if (chart.options.title.text == "Daily Forecast") {
+      setDailyTemp("C")
+    } 
+    else if (chart.options.title.text == "Hourly Forecast") {
+      setHourlyTemp("C")
+    }
     document.getElementById("tempButton").value="Convert to °F"
     temperatureElement.textContent = temp
     
   } else if (document.getElementById("tempButton").value=="Convert to °F") {
     temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°F"
     setyAxesLabel("F")
-    setDailyTemp("F")
+    if (chart.options.title.text == "Daily Forecast") {
+      setDailyTemp("F")
+    } 
+    else if (chart.options.title.text == "Hourly Forecast") {
+      setHourlyTemp("F")
+    }
     document.getElementById("tempButton").value="Convert to °C"
     temperatureElement.textContent = temp
   }
+  console.log(yAxesLabel)
+  chart.update()
   }

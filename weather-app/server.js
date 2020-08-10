@@ -18,8 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
       }).then(data => res.json(data.data)).catch(error => { console.error(error)})      
   })
   
-  app.listen(process.env.PORT || 3000, () => {
-    console.log('Server Started')
-
+  var listener = app.listen(process.env.PORT || 3000, () => {
+    console.log('Server Started on port %s', listener.address().port)
       
   })

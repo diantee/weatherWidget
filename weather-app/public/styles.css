@@ -103,6 +103,7 @@ body {
 
 .detail .toggle {
     margin-top: 5px;
+    visibility:hidden;
 }
 
 .wrapper{
@@ -118,6 +119,16 @@ body {
     max-width: 1000px;
 }
 
+.tempToggle{
+    display: flex;
+    justify-content: center;
+}
+
+#forecastButton{
+    display: flex;
+    justify-content: center;
+    visibility:hidden;
+}
 .city-search-container {
     display: flex;
     justify-content: center;
