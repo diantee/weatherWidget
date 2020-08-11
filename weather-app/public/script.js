@@ -30,51 +30,56 @@ const uvElement = document.querySelector('[data-uv]')
 const windElement = document.querySelector('[data-wind]')
 var kelvinTemp
 var jsonData
+var initChart = false
 
 function setWeatherData(data, place) {
   jsonData = data;
   kelvinTemp = data.current.temp
   locationElement.textContent = place
   statusElement.textContent = data['current']['weather']['0']['description']
-  temperatureElement.textContent = Math.round((((kelvinTemp - 273.15) * 9) / 5) + 32) + "°F"
-  document.getElementById("tempButton").value="Convert to °C"
   humidityElement.textContent = Math.round(data.current.humidity) + " %"
   uvElement.textContent = Math.round(data.current.uvi)
   windElement.textContent = Math.round(data.current.wind_speed) + " mph"
-  icon.innerHTML = "<img src=\"http://openweathermap.org/img/wn/" + data['current']['weather']['0']['icon'] + "@2x.png\">"
-  createChart();
+  icon.innerHTML = "<img src=\"https://openweathermap.org/img/wn/" + data['current']['weather']['0']['icon'] + "@2x.png\">"
+  if (initChart == false) {
+    temperatureElement.textContent = Math.round((((kelvinTemp - 273.15) * 9) / 5) + 32) + "°F"
+    document.getElementById("tempButton").value="Convert to °C"
+    initChart = !initChart
+    createChart();
+  }
+  else {
+    convertTemp()
+    UpdateChart(yAxesLabel.slice(-2)[0],chartTitle[0])
+  }
+}
+
+function convertTemp () {
+  var temp = kelvinTemp
+  if (yAxesLabel.slice(-2)[0] == "F") {temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°F"}
+  else if (yAxesLabel.slice(-2)[0] == "C") {temp = Math.round(temp - 273.15) + "°C"}
+  temperatureElement.textContent = temp
 }
 
 function toggleTemp () {
-  var temp = kelvinTemp
-
-  if (document.querySelector('[data-temperature]').innerHTML=='- -') {
-    void(0)
-    }
-  else if (document.getElementById("tempButton").value=="Convert to °C") {
-    temp = Math.round(temp - 273.15) + "°C"
-    setyAxesLabel("C")
-    if (chart.options.title.text == "Daily Forecast") {
-      setDailyTemp("C")
-    } 
-    else if (chart.options.title.text == "Hourly Forecast") {
-      setHourlyTemp("C")
-    }
-    document.getElementById("tempButton").value="Convert to °F"
-    temperatureElement.textContent = temp
-    
-  } else if (document.getElementById("tempButton").value=="Convert to °F") {
-    temp = Math.round((((temp - 273.15) * 9) / 5) + 32) + "°F"
-    setyAxesLabel("F")
-    if (chart.options.title.text == "Daily Forecast") {
-      setDailyTemp("F")
-    } 
-    else if (chart.options.title.text == "Hourly Forecast") {
-      setHourlyTemp("F")
-    }
-    document.getElementById("tempButton").value="Convert to °C"
-    temperatureElement.textContent = temp
+  if (document.getElementById("tempButton").value=="Convert to °C" && chartTitle == "Daily Forecast") {
+    UpdateChart("C","D")
   }
-  console.log(yAxesLabel)
-  chart.update()
+  else if (document.getElementById("tempButton").value=="Convert to °C" && chartTitle == "Hourly Forecast") {
+    UpdateChart("C","H")
+  }
+  else if (document.getElementById("tempButton").value=="Convert to °F" && chartTitle == "Daily Forecast") {
+    UpdateChart("F","D")
+  }
+  else if (document.getElementById("tempButton").value=="Convert to °F" && chartTitle == "Hourly Forecast") {
+    UpdateChart("F","H")
+  }
+  
+  convertTemp()
+
+  if (document.getElementById("tempButton").value=="Convert to °F") {
+    document.getElementById("tempButton").value="Convert to °C"
+  }
+  else if (document.getElementById("tempButton").value=="Convert to °C") {
+    document.getElementById("tempButton").value="Convert to °F"
+  }
   }
