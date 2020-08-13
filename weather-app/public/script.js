@@ -21,6 +21,7 @@ searchBox.addListener('places_changed', () => {
     })
 })
 
+// 
 const icon = document.getElementById('weather-icon')
 const locationElement = document.querySelector('[data-location]')
 const statusElement  = document.querySelector('[data-status]')
@@ -32,6 +33,10 @@ var kelvinTemp
 var jsonData
 var initChart = false
 
+/* Sets the 4 main weather data values and the main weather condition. Creates the chart, updates it if has already been created.
+Parameter 1 is the data returned from the OpenWeather API
+Parameter 2 is the location from the Google Places API
+Does not return anything.*/
 function setWeatherData(data, place) {
   jsonData = data;
   kelvinTemp = data.current.temp

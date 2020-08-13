@@ -1,3 +1,4 @@
+// Initializes components of daily/hourly forecast charts
 var daysOfWeek = new Array(7);
   daysOfWeek[0] = "Sunday";
   daysOfWeek[1] = "Monday";
@@ -15,6 +16,9 @@ var chartTitle = "Daily Forecast"
 var hourlyLabel = new Array(23);
 var hourlyTemp = new Array(23);
 
+/* Sets the x-axis labels of the forecast charts. 
+Parameter is the initial letter of the forecast chart type: "H" for Hourly chart, or "D" for Daily chart.
+Does not return anything.*/
 function setLabel (forecast){
   if (forecast=="D") {
     for (i = 0; i < dailyLabel.length; i++) {
@@ -35,6 +39,11 @@ function setLabel (forecast){
     chart.data.labels = hourlyLabel
   }
 }
+
+/* Sets the temperature data to the relevant dataset array. 
+Parameter 1 is the initial letter of the temperature unit: "F" for Fahrenheit, or "C" for Celsius.
+Parameter 2 is the initial letter of the forecast chart type: "H" for Hourly chart, or "D" for Daily chart.
+Does not return anything.*/
 function setTemp (unit,forecast){
   if (forecast=="D") {
     if (unit=="F") {
@@ -65,16 +74,24 @@ function setTemp (unit,forecast){
   }
 }
 
+/* Sets the forecast chart title. 
+Parameter is the initial letter of the forecast chart type: "H" for Hourly chart, or "D" for Daily chart.
+Does not return anything.*/
 function setTitle (forecast) {
   if (forecast == "D") {chartTitle = "Daily Forecast"} 
   else if (forecast == "H") {chartTitle = "Hourly Forecast"} 
   chart.options.title.text = chartTitle;}
 
+/* Sets the y-axis label of the forecast charts. 
+Parameter is the initial letter of the temperature unit: "F" for Fahrenheit, or "C" for Celsius.
+Does not return anything.*/
 function setyAxesLabel(unit) {
   if (unit=="F") {yAxesLabel = "Temperature (°F)"} 
   else if (unit=="C") {yAxesLabel = "Temperature (°C)"}
   chart.options.scales.yAxes['0'].scaleLabel.labelString = yAxesLabel;}
 
+/* Populates the Chart object and makes it visible. Function is only called once, when the first location is entered.
+Does not return anything.*/  
 function createChart(){
   UpdateChart("F","D")
   ctx.style.display = "inline";
@@ -82,6 +99,10 @@ function createChart(){
   document.getElementById("tempButton").style.visibility="visible";
 }
 
+/* Updates the components of the chart. 
+Parameter 1 is the initial letter of the temperature unit: "F" for Fahrenheit, or "C" for Celsius.
+Parameter 2 is the initial letter of the forecast chart type: "H" for Hourly chart, or "D" for Daily chart.
+Does not return anything.*/
 function UpdateChart (unit,forecast) {
   setLabel(forecast)
   setTemp(unit,forecast)
@@ -90,6 +111,8 @@ function UpdateChart (unit,forecast) {
   chart.update();
 }
 
+/* Toggles the temperature units between Fahrenheit or Celsius.
+Does not return anything.*/
 function toggleForecast () {
   if (yAxesLabel == "Temperature (°F)" && chartTitle == "Daily Forecast"){
     UpdateChart("F","H")
@@ -112,6 +135,7 @@ function toggleForecast () {
   }
 }
 
+// Chart data
 var data = {
   labels: dailyLabel,
   datasets: [
@@ -128,7 +152,7 @@ var data = {
   ]
 };
 
-//options
+// Chart options
 var options = {
   responsive: true,
   title: {
@@ -151,7 +175,7 @@ var options = {
   }
 };
 
-//create Chart class object
+// Create Chart class object
 ctx = document.getElementById("line-chart");
 ctx.style.display = "none";
 var chart = new Chart(ctx, {
